@@ -1,0 +1,80 @@
+Install
+
+	1. Burn latest Raspbian image
+	2. sudo apt-get update
+	3. sudo apt-get upgrade
+	4. sudo raspi-config --> enable camera, expand filesystem
+	5. // sudo apt-get install git-core
+	6. git clone git://git.drogon.net/wiringPi
+	7. cd wiringPi
+	8. ./build
+	9. sudo vi /etc/inittab --> disable getty on ttyAMA0
+	10. sudo vi /boot/cmdline.txt
+	11. sudo apt-get install samba
+	12. sudo vi /etc/samba/smb.conf --> add section [] set permissions [sudo chmod 777 /home/pi]
+	13. sudo apt-get install minicom
+
+
+Notes
+
+To enable the NTX2 from shell:
+
+gpio mode 0 out
+gpio write 0 1
+
+Das Blinkenlights
+
+OK light:
+
+gpio mode 11 out
+gpio write 11 1
+
+Replace "1" with "0" to turn off
+Replace "11" with "4" for Warn light
+
+To test GPS via serial
+
+
+	1. gpio mode 2 out
+	2. gpio write 2 0
+	3. minicom -b 9600 -o -D /dev/ttyAMA0
+
+
+To test the PWM
+
+	* Make sure PWM jumper is in place!
+	* Set the volume with amixer set PCM -- 100%
+	* Create the wav file with ./rtty in /home/pi/PWM Audio/tests/makewav
+	* Play the file with aplay rtty.wav
+	* For 600 Hz shift, set volume to 92.6% <-- depends on R values of course
+
+To check the DS18B20 temperature
+
+	* sudo modprobe w1-gpio
+	* sudo modprobe w1-therm
+	* cd /sys/bus/w1/devices/
+	* ls
+
+	* cd (whatever file you see there)
+	* cat w1_slave
+
+Check ADC
+
+pi@raspberrypi ~ $ gpio load spi
+pi@raspberrypi ~ $ gpio -x mcp3002:70:0 readall
++------+---------+--------+
+|  Pin | Digital | Analog |
++------+---------+--------+
+|   70 |     0   |   731  |
+|   71 |     0   |     0  |
++------+---------+--------+
+
+Circuit
+
+
+	* NTX EN is BCM GPIO17 (WiringPi 0)
+	* WARN LED is on BCM GPIO23 (WiringPi 4).  High=ON
+	* OK LED is on BCM GPIO7 (WiringPi 11).  High=ON
+	* UBX EN is BCM GPIO27 (WiringPi 2).  Low=ON
+
+
