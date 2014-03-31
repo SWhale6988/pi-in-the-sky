@@ -16,7 +16,7 @@
 | 7 - Plays that sound file                                         |
 | 8 - repeats steps 2-7                                             |
 |                                                                   |
-| Usual disclaimer bullshit goes here                               |
+|                                                                   |
 |                                                                   |
 \------------------------------------------------------------------*/
 
