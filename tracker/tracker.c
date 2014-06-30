@@ -39,7 +39,7 @@
 #include <wiringPi.h>
 
 // Telemetry settings
-#define PAYLOAD_ID	"PIESKY"	// *** SET THIS TO YOUR OWN PAYLOAD ID BEFORE FLIGHT ***
+#define PAYLOAD_ID	"PISKY"	// *** SET THIS TO YOUR OWN PAYLOAD ID BEFORE FLIGHT ***
 #define RTTY_BAUD 600
 
 // Pin allocations
@@ -53,7 +53,7 @@ FILE *file;
 int Records, FileNumber;
 struct termios options;
 
-char Hex[] = "0123456789ABCDEF";
+char Hex[] = "0123456789ABCDEF"; 
 
 struct TGPS
 {
